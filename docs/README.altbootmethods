@@ -114,12 +114,12 @@ methods can be used to serve the rest of live-medium.
 
 * NBD
 
-Note: Adjust ARCH_201408 as needed.
+Note: Adjust ARCH_201703 as needed.
 
 # cat << EOF > /tmp/nbd-server.conf
 [generic]
 [archiso]
     readonly = true
-    exportname = /dev/disk/by-label/ARCH_201408
+    exportname = /dev/disk/by-label/ARCH_201703
 EOF
 # nbd-server -C /tmp/nbd-server.conf
