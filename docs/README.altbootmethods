@@ -28,13 +28,6 @@ Note: Described method is for using with GRUB2.
       is at path <TARGET-PATH> on disk <D> and partition <P>,
       where filesystem is labeled as <TARGET-FS-LABEL>.
 
-menuentry "Arch Linux (x86_64)" {
-    set isofile="/<TARGET-PATH>/archlinux-<YYYY>.<MM>.<DD>-dual.iso"
-    loopback loop (hd<D>,<P>)$isofile
-    linux (loop)/arch/boot/x86_64/vmlinuz img_label=<TARGET-FS-LABEL> img_loop=$isofile
-    initrd (loop)/arch/boot/x86_64/archiso.img
-}
-
 menuentry "Arch Linux (i686)" {
     set isofile="/<TARGET-PATH>/archlinux-<YYYY>.<MM>.<DD>-dual.iso"
     loopback loop (hd<D>,<P>)$isofile
@@ -52,11 +45,6 @@ Note: Described method is for using with SYSLINUX. Anyway MEMDISK from SYSLINUX 
       On 32-bit systems, is needed to pass vmalloc=nnM to the kernel, where nn is the size
       of the ISO image plus 64 MiB (or 128 MiB).
 
-
-LABEL arch_x64
-   LINUX memdisk
-   INITRD /<TARGET-PATH>/archlinux-<YYYY>.<MM>.<DD>-dual.iso
-   APPEND iso
 
 LABEL arch_x32
    LINUX memdisk
