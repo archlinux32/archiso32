@@ -146,10 +146,7 @@ make_isolinux() {
 # Prepare /EFI
 make_efi() {
     mkdir -p ${work_dir}/iso/EFI/boot
-    cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/PreLoader.efi ${work_dir}/iso/EFI/boot/bootx64.efi
-    cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/HashTool.efi ${work_dir}/iso/EFI/boot/
-
-    cp ${work_dir}/x86_64/airootfs/usr/lib/systemd/boot/efi/systemd-bootx64.efi ${work_dir}/iso/EFI/boot/loader.efi
+    cp ${work_dir}/i686/airootfs/usr/share/efitools/efi/HashTool.efi ${work_dir}/iso/EFI/boot/
 
     mkdir -p ${work_dir}/iso/loader/entries
     cp ${script_path}/efiboot/loader/loader.conf ${work_dir}/iso/loader/
@@ -176,16 +173,13 @@ make_efiboot() {
     mount ${work_dir}/iso/EFI/archiso/efiboot.img ${work_dir}/efiboot
 
     mkdir -p ${work_dir}/efiboot/EFI/archiso
-    cp ${work_dir}/iso/${install_dir}/boot/x86_64/vmlinuz ${work_dir}/efiboot/EFI/archiso/vmlinuz.efi
-    cp ${work_dir}/iso/${install_dir}/boot/x86_64/archiso.img ${work_dir}/efiboot/EFI/archiso/archiso.img
+    cp ${work_dir}/iso/${install_dir}/boot/i686/vmlinuz ${work_dir}/efiboot/EFI/archiso/vmlinuz.efi
+    cp ${work_dir}/iso/${install_dir}/boot/i686/archiso.img ${work_dir}/efiboot/EFI/archiso/archiso.img
 
     cp ${work_dir}/iso/${install_dir}/boot/intel_ucode.img ${work_dir}/efiboot/EFI/archiso/intel_ucode.img
 
     mkdir -p ${work_dir}/efiboot/EFI/boot
-    cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/PreLoader.efi ${work_dir}/efiboot/EFI/boot/bootx64.efi
-    cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/HashTool.efi ${work_dir}/efiboot/EFI/boot/
-
-    cp ${work_dir}/x86_64/airootfs/usr/lib/systemd/boot/efi/systemd-bootx64.efi ${work_dir}/efiboot/EFI/boot/loader.efi
+    cp ${work_dir}/i686/airootfs/usr/share/efitools/efi/HashTool.efi ${work_dir}/efiboot/EFI/boot/
 
     mkdir -p ${work_dir}/efiboot/loader/entries
     cp ${script_path}/efiboot/loader/loader.conf ${work_dir}/efiboot/loader/
@@ -249,19 +243,19 @@ mkdir -p ${work_dir}
 run_once make_pacman_conf
 
 # Do all stuff for each airootfs
-for arch in i686 x86_64; do
+for arch in i686; do
     run_once make_basefs
     run_once make_packages
 done
 
 run_once make_packages_efi
 
-for arch in i686 x86_64; do
+for arch in i686; do
     run_once make_setup_mkinitcpio
     run_once make_customize_airootfs
 done
 
-for arch in i686 x86_64; do
+for arch in i686; do
     run_once make_boot
 done
 
@@ -272,7 +266,7 @@ run_once make_isolinux
 run_once make_efi
 run_once make_efiboot
 
-for arch in i686 x86_64; do
+for arch in i686; do
     run_once make_prepare
 done
 
