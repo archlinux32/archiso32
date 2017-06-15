@@ -215,11 +215,6 @@ if [[ ${EUID} -ne 0 ]]; then
     _usage 1
 fi
 
-if [[ ${arch} != x86_64 ]]; then
-    echo "This script needs to be run on x86_64"
-    _usage 1
-fi
-
 while getopts 'N:V:L:D:w:o:g:vh' arg; do
     case "${arg}" in
         N) iso_name="${OPTARG}" ;;
